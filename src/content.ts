@@ -55,18 +55,38 @@ export interface HeroChip {
   value: string;
 }
 
+export interface ProjectStat {
+  /** Counted up from 0 when the card scrolls in, so keep it a whole number. */
+  value: number;
+  /** Shown after the number, e.g. "+" or "%". */
+  suffix?: string;
+  label: string;
+}
+
 export interface Project {
   name: string;
-  /** Category and year, e.g. "Generative AI · 2026". */
+  /** Category, e.g. "Restaurant website". */
   kind: string;
+  year: string;
+  /** Pill next to the category, e.g. "Live" or "Case study". */
+  status: string;
+  /** Pulse the status dot (use for projects that are live). */
+  live?: boolean;
   description: string;
+  /** Exactly three headline numbers. */
+  stats: [ProjectStat, ProjectStat, ProjectStat];
   /** "How it works" steps, joined by arrows. */
   flow: string[];
   tags: string[];
-  liveUrl: string;
+  /** Leave out when there's no public deployment. */
+  liveUrl?: string;
   sourceUrl: string;
-  /** Screenshot or demo GIF. Leave out to show the placeholder slot. */
-  image?: SiteImage;
+  /** Screenshot, ideally 1440x900. Shown in a browser frame. */
+  image: SiteImage;
+  /** Address shown in the browser frame's bar. */
+  displayUrl: string;
+  /** Glow colour behind the screenshot, taken from the project's own brand. */
+  tint: string;
 }
 
 export interface About {
@@ -116,9 +136,9 @@ export const site: Site = {
 };
 
 export const links: Links = {
-  // TODO: these two URLs are guesses from the design. Replace with your real profiles.
+  // TODO: the LinkedIn URL is a guess from the design. Replace it with your real profile.
   linkedin: "https://linkedin.com/in/amit",
-  github: "https://github.com/amit",
+  github: "https://github.com/omezD",
   // TODO: drop a PDF in /public (e.g. /resume.pdf) and point this at it.
   resume: "#",
 };
@@ -153,24 +173,96 @@ export const marqueeItems: string[] = [
 
 export const projects: Project[] = [
   {
-    name: "RAG Chatbot",
-    kind: "Generative AI · 2026",
+    name: "Plumeria Café",
+    kind: "Restaurant website",
+    year: "2026",
+    status: "Live",
+    live: true,
     description:
-      "A chatbot that answers from your own documents. It splits and embeds uploaded files, pulls the most relevant passages for each question, and has the LLM answer with sources cited, all through Spring AI.",
-    flow: ["Docs", "Embeddings", "Vector store", "Spring AI", "Cited answer"],
-    tags: ["Java", "Spring Boot", "Spring AI", "RAG", "React"],
-    liveUrl: "#", // TODO
-    sourceUrl: "#", // TODO
+      "Website for a real café in Habra, West Bengal. The hero is a scroll-driven walk-in: 120 photo frames take you from the street sign, through the doors, to the counter. Then a real menu, gallery, reviews and a contact form that opens WhatsApp.",
+    stats: [
+      { value: 120, label: "frame scroll-scrubbed hero" },
+      { value: 58, label: "menu items from the printed cards" },
+      { value: 14, label: "dishes in the photo gallery" },
+    ],
+    flow: ["Scroll", "Canvas frames", "GSAP ScrollTrigger", "Menu & gallery", "WhatsApp"],
+    tags: ["React 19", "Vite", "Tailwind CSS", "GSAP", "Lenis", "Netlify"],
+    liveUrl: "https://plumeria-cafe-habra.netlify.app",
+    sourceUrl: "https://github.com/omezD/Plumeria_Cafe",
+    image: {
+      src: "/projects/plumeria.webp",
+      alt: "Plumeria Café home page: the lit café sign over the headline “Where every plate blooms.”",
+    },
+    displayUrl: "plumeria-cafe-habra.netlify.app",
+    tint: "#e8a15a",
   },
   {
-    name: "Employee Management SaaS",
-    kind: "Full-stack SaaS · 2025",
+    name: "Learnexa",
+    kind: "E-learning platform",
+    year: "2026",
+    status: "Case study",
     description:
-      "A multi-tenant HR platform for employees, departments, attendance and roles. It has secure role-based access, a REST API and a responsive admin dashboard.",
-    flow: ["Angular UI", "REST API", "Spring Security", "Database", "Deploy"],
-    tags: ["Java", "Spring Boot", "Angular", "REST", "SQL"],
-    liveUrl: "#", // TODO
-    sourceUrl: "#", // TODO
+      "A full e-learning platform for learners, faculty and admins. Faculty build courses with videos, PDFs and quizzes; admins approve and publish them; learners enroll, track progress and earn PDF certificates.",
+    stats: [
+      { value: 8, label: "Spring Boot services behind a gateway" },
+      { value: 3, label: "roles: learner, faculty, admin" },
+      { value: 6, label: "MySQL databases, one per service" },
+    ],
+    flow: ["Angular", "API gateway (JWT)", "Eureka", "Microservices", "MySQL"],
+    tags: ["Java 17", "Spring Boot", "Spring Cloud", "Angular 20", "TypeScript", "MySQL"],
+    sourceUrl: "https://github.com/omezD/Learnexa",
+    image: {
+      src: "/projects/learnexa.webp",
+      alt: "Learnexa landing page: “Learn Today. Lead Tomorrow” with a course search bar.",
+    },
+    displayUrl: "localhost:4200",
+    tint: "#2dd4bf",
+  },
+  {
+    name: "Workvaro",
+    kind: "HR & workforce SaaS",
+    year: "2026",
+    status: "Client project",
+    description:
+      "An employee management system for a growing company: people directory, leave and approvals, attendance with check-in, holidays and an org chart. Security first, with Keycloak sign-in, two-factor auth and encrypted bank details.",
+    stats: [
+      { value: 97, label: "automated API tests" },
+      { value: 85, label: "requests in the Bruno collection" },
+      { value: 256, suffix: "-bit", label: "AES-GCM field encryption" },
+    ],
+    flow: ["Angular", "Keycloak SSO", "Spring Cloud Gateway", "Services", "PostgreSQL"],
+    tags: ["Java 17", "Spring Boot", "Keycloak", "Angular", "PostgreSQL", "Docker"],
+    sourceUrl: "https://github.com/omezD/Workvaro",
+    image: {
+      src: "/projects/workvaro.webp",
+      alt: "Workvaro manager dashboard: check-in clock, leave balances, team status and pending approvals.",
+    },
+    displayUrl: "localhost:4200/app/dashboard",
+    tint: "#4ade80",
+  },
+  {
+    name: "Tripzo",
+    kind: "Travel stays marketplace",
+    year: "2026",
+    status: "Live",
+    live: true,
+    description:
+      "An Airbnb-style marketplace where hosts list stays and travellers browse and review them. It has sign-up and login, Joi validation on every write, and an “Ask AI” trip planner powered by Google Gemini.",
+    stats: [
+      { value: 4, label: "Express routers: listings, reviews, users, AI" },
+      { value: 3, label: "Mongoose models with Joi validation" },
+      { value: 12, label: "server-rendered EJS views" },
+    ],
+    flow: ["EJS views", "Express", "Passport auth", "Mongoose", "MongoDB"],
+    tags: ["Node.js", "Express", "MongoDB", "EJS", "Passport", "Gemini AI"],
+    liveUrl: "https://tripzo-app.onrender.com",
+    sourceUrl: "https://github.com/omezD/Tripzo",
+    image: {
+      src: "/projects/tripzo.webp",
+      alt: "Tripzo home page: a beach at sunset behind the headline “Travel. Stay. Belong.”",
+    },
+    displayUrl: "tripzo-app.onrender.com",
+    tint: "#ff5a5f",
   },
 ];
 
