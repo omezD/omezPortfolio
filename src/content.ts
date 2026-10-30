@@ -92,8 +92,10 @@ export interface Project {
 export interface About {
   statement: string;
   body: string;
-  /** Leave out to show the placeholder slot. */
+  /** Portrait photo, 3:4. Leave out to show the placeholder slot. */
   photo?: SiteImage;
+  /** Small glass chip over the photo. */
+  photoBadge?: { label: string; value: string };
 }
 
 export interface StackGroup {
@@ -105,7 +107,30 @@ export interface Job {
   when: string;
   role: string;
   company: string;
+  /** e.g. "Remote" or "Jabalpur". */
+  location?: string;
   description: string;
+  tags?: string[];
+}
+
+export interface Education {
+  when: string;
+  degree: string;
+  school: string;
+  location: string;
+  detail: string;
+}
+
+export interface Certification {
+  name: string;
+  issuer: string;
+}
+
+export interface Achievement {
+  /** Big figure, e.g. "400+". */
+  figure: string;
+  title: string;
+  detail: string;
 }
 
 export interface Testimonial {
@@ -120,24 +145,23 @@ export interface Testimonial {
 export const site: Site = {
   name: "Amit Das",
   initials: "AD",
-  tagline: "Software Engineer · Web Developer",
-  title: "Amit Das — Software Engineer & Web Developer",
+  tagline: "Software Engineer · Web & AI",
+  title: "Amit Das — Software Engineer, Web & AI",
   description:
-    "Amit Das builds solid Java and Spring Boot backends, React and Angular frontends, and generative AI features with Spring AI and RAG.",
+    "Amit Das is a Digital Specialist Engineer at Infosys and a CSE '26 graduate of IIITDM Jabalpur, building Java and Spring Boot microservices, Angular and React frontends, and generative AI features with Spring AI and RAG.",
   email: "das.amitt25@gmail.com",
   heroWord: "BUILD",
-  availability: "Open to full-time roles & freelance work",
+  availability: "DSE @ Infosys · open to freelance projects",
   roles: [
-    "Spring Boot APIs.",
+    "Spring Boot microservices.",
     "RAG apps with Spring AI.",
-    "React & Angular frontends.",
+    "Angular & React frontends.",
     "GenAI features that ship.",
   ],
 };
 
 export const links: Links = {
-  // TODO: the LinkedIn URL is a guess from the design. Replace it with your real profile.
-  linkedin: "https://linkedin.com/in/amit",
+  linkedin: "https://www.linkedin.com/in/amit-das-1b177324a/",
   github: "https://github.com/omezD",
   // TODO: drop a PDF in /public (e.g. /resume.pdf) and point this at it.
   resume: "#",
@@ -163,12 +187,14 @@ export const marqueeItems: string[] = [
   "Spring Boot",
   "Spring AI",
   "RAG",
-  "Generative AI",
-  "React",
+  "Microservices",
   "Angular",
-  "JavaScript",
-  "Web Design",
-  "Deployment",
+  "React",
+  "TypeScript",
+  "Node.js",
+  "PostgreSQL",
+  "Docker",
+  "AWS",
 ];
 
 export const projects: Project[] = [
@@ -268,31 +294,94 @@ export const projects: Project[] = [
 
 export const about: About = {
   statement:
-    "I build software that holds up: solid Java backends, fast frontends, and AI features that actually help people.",
-  body: "Most of my work runs on Spring Boot, React and Angular. Lately I've been building retrieval-augmented generation with Spring AI, so apps can answer questions from real company data. I do the whole job, from design to debugging to deployment.",
+    "I build software that holds up: scalable backends, fast frontends, and AI features that actually help people.",
+  body: "I'm a Digital Specialist Engineer at Infosys and a CSE '26 graduate of IIITDM Jabalpur. I work across the whole lifecycle, from requirements and design to development, testing, debugging and deployment: Java and Spring Boot microservices, Angular and React frontends, and AI applications built on Spring AI, RAG and LLMs. I'm most interested in where AI meets software engineering, and how to turn it into practical, scalable products.",
+  photo: {
+    src: "/about/amit.webp",
+    alt: "Amit Das standing on a campus lawn in front of a building with tall white columns.",
+  },
+  photoBadge: { label: "Now", value: "DSE Trainee @ Infosys" },
 };
 
 export const stackGroups: StackGroup[] = [
-  { label: "Backend", items: ["Java", "Spring Boot", "REST APIs"] },
-  { label: "Frontend", items: ["React", "Angular", "JavaScript", "Web Design"] },
-  { label: "AI", items: ["Generative AI", "RAG", "Spring AI"] },
-  { label: "Ship", items: ["Debugging", "Deployment"] },
+  { label: "Languages", items: ["Java", "TypeScript", "JavaScript", "Python", "C++", "SQL"] },
+  { label: "Backend", items: ["Spring Boot", "Spring Cloud", "Microservices", "Node.js", "Express", "REST APIs"] },
+  { label: "Frontend", items: ["Angular", "React", "Next.js", "Tailwind CSS"] },
+  { label: "AI", items: ["Spring AI", "RAG", "LLMs", "Prompt engineering", "Vector databases", "Gemini"] },
+  { label: "Data", items: ["PostgreSQL", "MySQL", "MongoDB"] },
+  { label: "Ship", items: ["Docker", "AWS", "Jenkins", "SonarQube", "Maven", "Git"] },
 ];
 
 export const jobs: Job[] = [
   {
-    when: "2024 — Present",
-    role: "Software Engineer",
-    company: "[Company name]",
+    when: "May 2026 — Present",
+    role: "Digital Specialist Engineer (Trainee)",
+    company: "Infosys",
+    location: "Mysore",
     description:
-      "Build full-stack features with Spring Boot and React/Angular. Lead GenAI work, including RAG pipelines on Spring AI.",
+      "Building enterprise applications with Java 21, Spring Boot, Spring Cloud and Angular, including a microservices-based eLearning platform. Built Passport Sayaak, a RAG system on Spring AI: document splitting, embeddings, vector retrieval, query expansion and LLM answers. CI/CD with Jenkins, SonarQube and Artifactory; Docker and AWS (ECS, ECR).",
+    tags: ["Java 21", "Spring Boot", "Spring AI", "RAG", "Angular", "Jenkins", "AWS"],
   },
   {
-    when: "2022 — 2024",
-    role: "Web Developer",
-    company: "[Company name]",
+    when: "Apr 2025 — May 2025",
+    role: "Software Engineer Intern",
+    company: "Bluestock FinTech",
+    location: "Remote",
     description:
-      "Designed and built responsive web apps, connected REST APIs, and owned debugging and production deployments.",
+      "Turned Figma designs into responsive, reusable React and Tailwind components, improving page load and render performance by 20%. Connected the UI to Express REST APIs with the backend team, making the app 25% more responsive.",
+    tags: ["React", "JavaScript", "Tailwind CSS", "Express", "Figma"],
+  },
+  {
+    when: "Aug 2024 — Apr 2025",
+    role: "Backend Developer, Fusion Portal",
+    company: "FusionIIIT, IIITDM Jabalpur",
+    location: "Jabalpur",
+    description:
+      "Built the notification service for the institute's ERP: 15+ REST APIs with sub-200ms latency, email-like inbox features, and PostgreSQL tuning that cut query time by 40%. Integrated it with 8 other module teams.",
+    tags: ["Node.js", "Express", "PostgreSQL", "Next.js", "JWT"],
+  },
+];
+
+export const education: Education[] = [
+  {
+    when: "Nov 2022 — Aug 2026",
+    degree: "B.Tech, Computer Science and Engineering",
+    school: "Indian Institute of Information Technology, Design and Manufacturing, Jabalpur",
+    location: "Jabalpur, Madhya Pradesh",
+    detail:
+      "CPI 7.7. Coursework in data structures and algorithms, operating systems, DBMS, computer networks, OOP and AI/ML.",
+  },
+  {
+    when: "2020 — 2022",
+    degree: "Higher Secondary (Class 12), PCM",
+    school: "Prafullanagar Vidyamandir (HS)",
+    location: "West Bengal",
+    detail: "Physics, Chemistry and Mathematics. Class 10 from the same school in 2020.",
+  },
+];
+
+export const certifications: Certification[] = [
+  { name: "Google AI Essentials", issuer: "Google" },
+  { name: "Advanced Computer Networks (Elite)", issuer: "NPTEL" },
+  { name: "Object Oriented System Development Using UML, Java and Patterns", issuer: "NPTEL" },
+  { name: "The Joy of Computing Using Python", issuer: "NPTEL" },
+];
+
+export const achievements: Achievement[] = [
+  {
+    figure: "400+",
+    title: "LeetCode problems solved",
+    detail: "Across core DSA patterns, with a peak contest rating of 1503 (OMEZ).",
+  },
+  {
+    figure: "GRiD 7.0",
+    title: "National semi-finalist",
+    detail: "Reached the national semi-finals of Flipkart GRiD 7.0, a national-level technical competition.",
+  },
+  {
+    figure: "10+",
+    title: "Events led",
+    detail: "As co-ordinator of the Business and Management Club, IIITDM Jabalpur (2022–2025).",
   },
 ];
 

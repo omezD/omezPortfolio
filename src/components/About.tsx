@@ -16,23 +16,42 @@ export function About() {
           <p className="text-[clamp(26px,3vw,42px)] leading-[1.2] font-medium tracking-[-.03em] text-pretty">
             {about.statement}
           </p>
-          <p className="max-w-[540px] text-[17px] leading-[1.65] text-pretty text-neutral-400">
-            {about.body}
-          </p>
-          {about.photo ? (
-            <Image
-              src={about.photo.src}
-              alt={about.photo.alt}
-              width={360}
-              height={360}
-              sizes="180px"
-              className="aspect-square w-[180px] rounded-lg object-cover shadow-sm"
-            />
-          ) : (
-            <div className="slot aspect-square w-[180px] rounded-lg text-[11px] text-neutral-500 shadow-sm">
-              [ your photo ]
-            </div>
-          )}
+          <div className="grid items-start gap-7 sm:grid-cols-[minmax(0,250px)_minmax(0,1fr)]">
+            {about.photo ? (
+              <figure className="about-photo group relative aspect-[3/4] w-[min(100%,260px)] sm:w-full">
+                <span aria-hidden="true" className="about-photo-frame" />
+                <div className="relative h-full overflow-hidden rounded-lg shadow-sm">
+                  <Image
+                    src={about.photo.src}
+                    alt={about.photo.alt}
+                    fill
+                    sizes="(min-width: 640px) 250px, 260px"
+                    className="object-cover object-top transition-transform duration-700 ease-out group-hover:scale-[1.04]"
+                  />
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-x-0 bottom-0 h-1/2 bg-linear-to-t from-[rgba(22,24,38,.85)] to-transparent"
+                  />
+                </div>
+                {about.photoBadge && (
+                  <figcaption className="about-photo-badge">
+                    <span aria-hidden="true" className="diamond" />
+                    <span className="flex flex-col leading-[1.3]">
+                      <span className="text-[11px] text-neutral-500">{about.photoBadge.label}</span>
+                      <span>{about.photoBadge.value}</span>
+                    </span>
+                  </figcaption>
+                )}
+              </figure>
+            ) : (
+              <div className="slot aspect-square w-[180px] rounded-lg text-[11px] text-neutral-500 shadow-sm">
+                [ your photo ]
+              </div>
+            )}
+            <p className="max-w-[540px] text-[17px] leading-[1.65] text-pretty text-neutral-400">
+              {about.body}
+            </p>
+          </div>
         </div>
 
         <div data-reveal className="flex flex-col gap-3">
