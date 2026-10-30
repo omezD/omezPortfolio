@@ -666,6 +666,45 @@
   transition: transform 1.1s var(--ease);
 }
 
+/* ── Experience deck ────────────────────────────────────────────────────────
+   <StackDeck /> adds .deck-on and drives --enter / --stack from scroll. Each
+   card rises into place, then lifts away and fades as the next one slides
+   over it; scrolling back plays it in reverse. */
+.deck-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.deck-on.deck-list {
+  gap: 32vh;
+  padding-bottom: 6vh;
+}
+/* Keep DECK_TOP / DECK_STEP in StackDeck.tsx in sync. */
+.deck-on .deck-slot {
+  position: sticky;
+  top: calc(104px + var(--i) * 14px);
+}
+.deck-card {
+  position: relative;
+  transform-origin: 50% 0;
+  transition: box-shadow 0.3s;
+}
+.deck-on .deck-card {
+  transform: translateY(calc(var(--stack, 0) * -48px + (1 - var(--enter, 1)) * 40px))
+    scale(calc(1 - var(--stack, 0) * 0.1 - (1 - var(--enter, 1)) * 0.05));
+  opacity: calc((1 - var(--stack, 0) * 0.95) * (0.3 + var(--enter, 1) * 0.7));
+  will-change: transform, opacity;
+}
+.deck-on .deck-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(145, 132, 217, 0.45),
+    0 24px 70px rgba(145, 132, 217, 0.14);
+}
+.deck-on .deck-dot {
+  opacity: calc(1 - var(--stack, 0));
+  box-shadow: 0 0 calc(var(--enter, 0) * 12px) var(--color-accent);
+}
+
 /* ── About photo ────────────────────────────────────────────────────────── */
 /* An offset accent outline behind the photo that shifts on hover. */
 .about-photo-frame {

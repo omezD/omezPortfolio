@@ -300,7 +300,7 @@ export const about: About = {
     src: "/about/amit.webp",
     alt: "Amit Das standing on a campus lawn in front of a building with tall white columns.",
   },
-  photoBadge: { label: "Now", value: "DSE Trainee @ Infosys" },
+  photoBadge: { label: "Now", value: "DSE @ Infosys, Bangalore" },
 };
 
 export const stackGroups: StackGroup[] = [
@@ -315,9 +315,9 @@ export const stackGroups: StackGroup[] = [
 export const jobs: Job[] = [
   {
     when: "May 2026 — Present",
-    role: "Digital Specialist Engineer (Trainee)",
+    role: "Digital Specialist Engineer",
     company: "Infosys",
-    location: "Mysore",
+    location: "Bangalore DC",
     description:
       "Building enterprise applications with Java 21, Spring Boot, Spring Cloud and Angular, including a microservices-based eLearning platform. Built Passport Sayaak, a RAG system on Spring AI: document splitting, embeddings, vector retrieval, query expansion and LLM answers. CI/CD with Jenkins, SonarQube and Artifactory; Docker and AWS (ECS, ECR).",
     tags: ["Java 21", "Spring Boot", "Spring AI", "RAG", "Angular", "Jenkins", "AWS"],
