@@ -362,14 +362,6 @@
   flex-direction: column;
   gap: 28px;
 }
-.work-stack .project-list {
-  gap: 14vh;
-}
-/* Keep STACK_TOP / STACK_STEP in WorkMotion.tsx in sync. */
-.work-stack .project-slot {
-  position: sticky;
-  top: calc(92px + var(--i) * 20px);
-}
 
 .project-card {
   position: relative;
@@ -382,8 +374,6 @@
   border-radius: var(--radius-lg);
   background: var(--color-surface);
   box-shadow: var(--shadow-sm);
-  transform-origin: 50% 0;
-  transform: scale(calc(1 - var(--stack, 0) * 0.07));
   transition:
     box-shadow 0.4s,
     translate 0.4s var(--ease);
@@ -439,15 +429,6 @@
 .project-card:hover .project-spot,
 .project-card:hover::before {
   opacity: 1;
-}
-/* Darkens a card as the next one stacks over it. */
-.project-dim {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  pointer-events: none;
-  background: var(--color-bg);
-  opacity: calc(var(--stack, 0) * 0.6);
 }
 
 .project-body {
@@ -687,12 +668,14 @@
 .deck-card {
   position: relative;
   transform-origin: 50% 0;
-  transition: box-shadow 0.3s;
+  transition:
+    box-shadow 0.4s,
+    translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .deck-on .deck-card {
   transform: translateY(calc(var(--stack, 0) * -48px + (1 - var(--enter, 1)) * 40px))
     scale(calc(1 - var(--stack, 0) * 0.1 - (1 - var(--enter, 1)) * 0.05));
-  opacity: calc((1 - var(--stack, 0) * 0.95) * (0.3 + var(--enter, 1) * 0.7));
+  opacity: calc((1 - var(--stack, 0) * 1.25) * (0.3 + var(--enter, 1) * 0.7));
   will-change: transform, opacity;
 }
 .deck-on .deck-card:hover {

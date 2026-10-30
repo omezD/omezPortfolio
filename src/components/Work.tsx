@@ -2,6 +2,7 @@ import Image from "next/image";
 import type { CSSProperties } from "react";
 import { links, projects, type Project } from "@/content";
 import { externalProps } from "@/lib/external";
+import { StackDeck } from "./StackDeck";
 import { WorkMotion } from "./WorkMotion";
 
 const TITLE = "Things I've built end-to-end.";
@@ -17,15 +18,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
   let d = 0;
 
   return (
-    <li className="project-slot" style={vars({ "--i": index })}>
+    <li data-deck-item className="deck-slot" style={vars({ "--i": index })}>
       <article
         data-project
         aria-labelledby={`project-${index}`}
-        className="project-card"
+        className="project-card deck-card"
         style={vars({ "--tint": project.tint })}
       >
         <div aria-hidden="true" className="project-spot" />
-        <div aria-hidden="true" className="project-dim" />
 
         <div className="project-body">
           <div className="pj-in flex items-center gap-4" style={vars({ "--d": d++ })}>
@@ -204,7 +204,8 @@ export function Work() {
         </div>
       </div>
 
-      <ol className="project-list">
+      <StackDeck />
+      <ol data-deck className="deck-list project-list">
         {projects.map((project, i) => (
           <ProjectCard key={project.name} project={project} index={i} />
         ))}
