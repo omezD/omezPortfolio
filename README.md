@@ -1,5 +1,7 @@
 # Amit Das — Portfolio
 
+**Live:** https://omezportfolio.vercel.app
+
 Single-page portfolio built with Next.js (App Router), TypeScript and Tailwind CSS v4, from the Nocturne design handoff.
 
 ## Run it
