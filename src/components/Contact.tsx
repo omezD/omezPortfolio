@@ -1,4 +1,4 @@
-import { links, site } from "@/content";
+import { features, links, site } from "@/content";
 import { externalProps } from "@/lib/external";
 import { CopyEmailButton } from "./CopyEmailButton";
 
@@ -8,7 +8,7 @@ export function Contact() {
     { href: links.linkedin, label: "LinkedIn", arrow: true },
     { href: links.github, label: "GitHub", arrow: true },
     { href: links.resume, label: "Résumé", arrow: true },
-  ];
+  ].filter((link) => link.href !== "#");
 
   return (
     <section
@@ -21,7 +21,7 @@ export function Contact() {
       }}
     >
       <p>
-        <span className="kicker">05 — Contact</span>
+        <span className="kicker">{features.testimonials ? "05" : "04"} — Contact</span>
       </p>
       <h2
         id="contact-title"

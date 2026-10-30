@@ -30,7 +30,7 @@ export default function Home() {
         <About />
         <Experience />
         <OpenSource />
-        <Testimonials />
+        {features.testimonials && <Testimonials />}
         <Contact />
       </main>
       {features.scrollReveal && <RevealObserver />}

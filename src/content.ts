@@ -46,8 +46,10 @@ export interface Features {
   available: boolean;
   /** Fade-and-rise sections on scroll. */
   scrollReveal: boolean;
-  /** Replace the open-source slot with a live contribution graph for `links.github`. */
+  /** Show a live contribution graph (ghchart.rshah.org) in the GitHub card. */
   githubGraph: boolean;
+  /** Show the "Kind words" section. Turn on once the quotes are real. */
+  testimonials: boolean;
 }
 
 export interface HeroChip {
@@ -133,6 +135,16 @@ export interface Achievement {
   detail: string;
 }
 
+export interface GithubProfile {
+  username: string;
+  name: string;
+  bio: string;
+  /** Saved locally so the page doesn't depend on GitHub being reachable. */
+  avatar: SiteImage;
+  publicRepos: number;
+  location: string;
+}
+
 export interface Testimonial {
   text: string;
   name: string;
@@ -164,6 +176,7 @@ export const links: Links = {
   linkedin: "https://www.linkedin.com/in/amit-das-1b177324a/",
   github: "https://github.com/omezD",
   // TODO: drop a PDF in /public (e.g. /resume.pdf) and point this at it.
+  // While it's "#", the Résumé link is hidden.
   resume: "#",
 };
 
@@ -172,7 +185,9 @@ export const features: Features = {
   marquee: true,
   available: true,
   scrollReveal: true,
-  githubGraph: false,
+  githubGraph: true,
+  // Off until the quotes below are real ones from real people.
+  testimonials: false,
 };
 
 /** Exactly three chips float around the portrait. */
@@ -385,6 +400,16 @@ export const achievements: Achievement[] = [
   },
 ];
 
+export const githubProfile: GithubProfile = {
+  username: "omezD",
+  name: "Amit Das",
+  bio: "Turning ideas into production-ready backends, dashboards and AI document assistants. Spring Boot · Angular · Spring AI.",
+  avatar: { src: "/about/github-avatar.webp", alt: "GitHub avatar of omezD: a hooded developer at a laptop" },
+  publicRepos: 20,
+  location: "Bangalore, India",
+};
+
+/** Placeholders. Replace with real quotes, then set `features.testimonials` to true. */
 export const testimonials: Testimonial[] = [
   {
     text: "Amit took our idea from a rough spec to a working product in weeks. Clean code and clear communication the whole way.",

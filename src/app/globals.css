@@ -688,6 +688,34 @@
   box-shadow: 0 0 calc(var(--enter, 0) * 12px) var(--color-accent);
 }
 
+/* ── GitHub card (Open source band) ─────────────────────────────────────── */
+.gh-card {
+  box-shadow: 0 0 0 1px rgba(181, 171, 252, 0.18);
+  transition:
+    box-shadow 0.4s,
+    translate 0.4s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.gh-card:hover {
+  translate: 0 -3px;
+  box-shadow:
+    0 0 0 1px var(--color-accent),
+    0 20px 50px rgba(145, 132, 217, 0.2);
+}
+.gh-avatar::after {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 1px solid rgba(145, 132, 217, 0.6);
+  box-shadow: 0 0 18px rgba(145, 132, 217, 0.45);
+}
+/* ghchart draws for light backgrounds; invert it for the dark band while
+   keeping the accent hue. */
+.gh-chart {
+  filter: invert(1) hue-rotate(180deg) saturate(1.2);
+  opacity: 0.9;
+}
+
 /* ── About photo ────────────────────────────────────────────────────────── */
 /* An offset accent outline behind the photo that shifts on hover. */
 .about-photo-frame {
@@ -748,7 +776,8 @@
   .browser {
     transform: none;
   }
-  .project-card:hover {
+  .project-card:hover,
+  .gh-card:hover {
     translate: none;
   }
 }

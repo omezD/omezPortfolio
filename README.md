@@ -15,16 +15,15 @@ Open http://localhost:3000. `npm run build` makes the production build; `npm run
 
 Everything you'd want to change lives in [`src/content.ts`](src/content.ts): name and tagline, typed roles, projects, toolkit, jobs, testimonials, links and feature flags. It is fully typed, so a missing field shows up as an editor error.
 
-Still placeholders (search for `TODO` and `[`):
+Still to fill in (search for `TODO`):
 
-- `links.linkedin` / `links.github` are guesses from the design; `links.resume` is `#`
-- Project `liveUrl` / `sourceUrl`, and project screenshots (`image`)
-- Experience company names and dates; testimonial quotes, names and roles
-- About photo (`about.photo`)
+- `links.resume` is `#`, so the Résumé link is hidden. Drop a PDF in `public/` and point it there.
+- Testimonials are placeholders and the section is switched off (`features.testimonials: false`). Add real quotes, ideally from LinkedIn recommendations, then switch it on.
+- `githubProfile.publicRepos` is a fixed number; update it now and then.
 
 Images go in `public/` and are referenced by path, e.g. `image: { src: "/projects/rag.webp", alt: "…" }`.
 
-Set `features.githubGraph` to `true` to replace the open-source slot with a live contribution graph for the username in `links.github`.
+The GitHub card in the open-source band uses `githubProfile`; `features.githubGraph` adds a live contribution graph from ghchart.rshah.org.
 
 ## Where things are
 
